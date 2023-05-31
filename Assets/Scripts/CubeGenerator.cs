@@ -1,0 +1,61 @@
+using Microsoft.MixedReality.Toolkit;
+using Microsoft.MixedReality.Toolkit.Input;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class BallGenerator : MonoBehaviour, IMixedRealityPointerHandler
+{
+    [SerializeField] private GameObject BallPrefab;
+    [SerializeField] private GameObject reflectorShield;
+
+    private void OnEnable()
+    {
+        CoreServices.InputSystem?.RegisterHandler<IMixedRealityPointerHandler>(this);
+    }
+
+    private void OnDisable()
+    {
+        CoreServices.InputSystem?.UnregisterHandler<IMixedRealityPointerHandler>(this);
+    }
+
+
+
+
+    public void OnPointerClicked(MixedRealityPointerEventData eventData)
+    {
+        Debug.Log("Clicked");        
+    }
+
+    public void OnPointerDown(MixedRealityPointerEventData eventData)
+    {
+        Debug.Log("Pointer Down");
+        //throw new System.NotImplementedException();
+    }
+
+    public void OnPointerDragged(MixedRealityPointerEventData eventData)
+    {
+        Debug.Log("Dragged");
+        //throw new System.NotImplementedException();
+    }
+
+    public void OnPointerUp(MixedRealityPointerEventData eventData)
+    {
+        GameObject ball = Instantiate(BallPrefab, (reflectorShield.transform.localPosition + new Vector3(0f,0f,0.1f)), reflectorShield.transform.localRotation).gameObject;
+        Rigidbody ballRigidbody = ball.transform.Find("Ball").GetComponent<Rigidbody>();
+        ballRigidbody.velocity = transform.TransformDirection(new Vector3(0f, 0f, 1.5f));
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        CoreServices.InputSystem?.RegisterHandler<IMixedRealityPointerHandler>(this);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+}
