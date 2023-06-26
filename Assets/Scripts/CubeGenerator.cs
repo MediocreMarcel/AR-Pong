@@ -4,9 +4,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class BallGenerator : MonoBehaviour, IMixedRealityPointerHandler
 {
+    public UnityEvent OnBallServed;
     [SerializeField] private GameObject BallPrefab;
     [SerializeField] private GameObject reflectorShield;
 
@@ -45,6 +47,7 @@ public class BallGenerator : MonoBehaviour, IMixedRealityPointerHandler
         GameObject ball = Instantiate(BallPrefab, (reflectorShield.transform.localPosition + new Vector3(0f,0f,0.1f)), reflectorShield.transform.localRotation).gameObject;
         Rigidbody ballRigidbody = ball.transform.Find("Ball").GetComponent<Rigidbody>();
         ballRigidbody.velocity = transform.TransformDirection(new Vector3(0f, 0f, 1.5f));
+        this.OnBallServed.Invoke();
     }
 
     // Start is called before the first frame update

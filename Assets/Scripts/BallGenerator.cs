@@ -3,9 +3,11 @@ using Microsoft.MixedReality.Toolkit.Input;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CubeGenerator : MonoBehaviour, IMixedRealityPointerHandler
 {
+    public UnityEvent OnBallServed;
     [SerializeField] private GameObject reflectorShield;
 
     private void OnEnable()
@@ -44,6 +46,7 @@ public class CubeGenerator : MonoBehaviour, IMixedRealityPointerHandler
         GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
         cube.transform.localPosition = reflectorShield.transform.localPosition;
         cube.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+        this.OnBallServed.Invoke();
     }
 
     // Start is called before the first frame update

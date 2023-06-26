@@ -22,6 +22,8 @@ public class HandTracker : MonoBehaviour
         if (HandJointUtils.TryGetJointPose(TrackedHandJoint.Palm, this.handedness, out pose))
         {
             reflectorShild.transform.localPosition = pose.Position;
+            reflectorShild.transform.rotation = pose.Rotation;
+            reflectorShild.transform.rotation = reflectorShild.transform.rotation * Quaternion.Euler(new Vector3(90, 0, 0));
         }
     }
 }
