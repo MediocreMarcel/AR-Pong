@@ -41,6 +41,7 @@ public class GameHandler : MonoBehaviour
         this.GoOverlayPinchToThrow.SetActive(true);
         this.GoOverlayPoints.SetActive(false);
         this.points = 0;
+        this.UpdatePointOverlay();
     }
 
     public void IncreasePoints()
