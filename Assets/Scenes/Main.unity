@@ -1051,7 +1051,7 @@ GameObject:
   - component: {fileID: 910412462}
   m_Layer: 0
   m_Name: ReflectorShield
-  m_TagString: Untagged
+  m_TagString: ReflectorShield
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1159,6 +1159,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e7ce176acee3e049a51f02ec146ec8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnBallServed:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 64951991}
+        m_TargetAssemblyTypeName: GameHandler, Assembly-CSharp
+        m_MethodName: onBallServed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   BallPrefab: {fileID: 4537490770963529340, guid: 0aa143e0b16e4c849976ea4a20f32728, type: 3}
   reflectorShield: {fileID: 910412456}
 --- !u!1 &1037842227
@@ -1367,7 +1382,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1320713115
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1799,6 +1814,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc54ad1465fda6f4eba7c557e90c046f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnEndzoneCollision:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 64951991}
+        m_TargetAssemblyTypeName: GameHandler, Assembly-CSharp
+        m_MethodName: onBallDestroyed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1436752199
 GameObject:
   m_ObjectHideFlags: 0
