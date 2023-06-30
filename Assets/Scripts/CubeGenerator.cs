@@ -26,19 +26,16 @@ public class BallGenerator : MonoBehaviour, IMixedRealityPointerHandler
 
 
     public void OnPointerClicked(MixedRealityPointerEventData eventData)
-    {
-        Debug.Log("Clicked");        
+    {       
     }
 
     public void OnPointerDown(MixedRealityPointerEventData eventData)
     {
-        Debug.Log("Pointer Down");
         //throw new System.NotImplementedException();
     }
 
     public void OnPointerDragged(MixedRealityPointerEventData eventData)
     {
-        Debug.Log("Dragged");
         //throw new System.NotImplementedException();
     }
 

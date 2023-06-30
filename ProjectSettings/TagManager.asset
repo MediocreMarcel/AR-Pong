@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ball
   - ReflectorShield
+  - Backwall
   layers:
   - Default
   - TransparentFX

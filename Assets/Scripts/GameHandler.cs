@@ -2,46 +2,60 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum GameState
 {
-    MENU, SERVE, PLAY
+    SERVE, PLAY, GAME_OVER
 }
 
 public class GameHandler : MonoBehaviour
 {
+    public GameState state = GameState.SERVE;
     int points = 0;
-    GameState state = GameState.SERVE;
+
     [SerializeField] GameObject GoOverlayPinchToThrow;
-    [SerializeField] GameObject GoOverlayPoints;
-    TMP_Text OverlayPoints;
+
+    [SerializeField] GameObject GoGameOverUi;
+    TMP_Text TextGameOver;
     
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] GameObject GoPointsText;
+    TMP_Text TextPoints;
+
+    private void Start()
     {
-        OverlayPoints = GoOverlayPoints.GetComponent<TMP_Text>();
+        TextGameOver = GoGameOverUi.transform.GetChild(0).GetComponent<TMP_Text>();
+        TextPoints = GoPointsText.GetComponent<TMP_Text>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SwitchToMainMenu()
     {
-        
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    public void Restart()
+    {
+        this.points = 0;
+        this.UpdatePointOverlay();
+        this.GoGameOverUi.SetActive(false);
+        this.state = GameState.SERVE;
+        this.GoOverlayPinchToThrow.SetActive(true);
     }
 
     public void onBallServed()
     {
         this.state = GameState.PLAY;
         this.GoOverlayPinchToThrow.SetActive(false);
-        this.GoOverlayPoints.SetActive(true);
+        this.GoPointsText.SetActive(true);
     }
 
     public void onBallDestroyed()
     {
-        this.state = GameState.SERVE;
-        this.GoOverlayPinchToThrow.SetActive(true);
-        this.GoOverlayPoints.SetActive(false);
-        this.points = 0;
-        this.UpdatePointOverlay();
+        this.state = GameState.GAME_OVER;
+        this.GoPointsText.SetActive(false);
+        this.GoGameOverUi.SetActive(true);
+
+        TextGameOver.SetText($"Game Over\nPoints: {this.points}");
     }
 
     public void IncreasePoints()
@@ -52,6 +66,6 @@ public class GameHandler : MonoBehaviour
 
     private void UpdatePointOverlay()
     {
-        this.OverlayPoints.text = $"Points: {this.points}";
+        this.TextPoints.text = $"Points: {this.points}";
     }
 }

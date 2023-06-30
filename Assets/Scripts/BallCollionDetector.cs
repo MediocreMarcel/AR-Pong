@@ -27,10 +27,9 @@ public class BallCollionDetector : MonoBehaviour
 
         Rigidbody ballRigidbody = GetComponent<Rigidbody>();
         ballRigidbody.velocity = transform.TransformDirection(new Vector3(0f, 0f, 1.5f));
-        this.GameHandler.IncreasePoints();
-        if (collision.gameObject.tag != "ReflectorShield")
+        if (!collision.gameObject.tag.Equals("ReflectorShield") && !collision.gameObject.tag.Equals("Backwall"))
         {
-            this.OnPointCollission.Invoke();
+            this.GameHandler.IncreasePoints();
         }
         
     }
