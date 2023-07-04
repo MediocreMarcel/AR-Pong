@@ -26,7 +26,7 @@ public class BallGenerator : MonoBehaviour, IMixedRealityPointerHandler
 
 
     public void OnPointerClicked(MixedRealityPointerEventData eventData)
-    {       
+    {
     }
 
     public void OnPointerDown(MixedRealityPointerEventData eventData)
@@ -41,10 +41,14 @@ public class BallGenerator : MonoBehaviour, IMixedRealityPointerHandler
 
     public void OnPointerUp(MixedRealityPointerEventData eventData)
     {
-        GameObject ball = Instantiate(BallPrefab, (reflectorShield.transform.localPosition + new Vector3(0f,0f,0.1f)), reflectorShield.transform.localRotation).gameObject;
-        Rigidbody ballRigidbody = ball.transform.Find("Ball").GetComponent<Rigidbody>();
-        ballRigidbody.velocity = transform.TransformDirection(new Vector3(0f, 0f, 1.5f));
-        this.OnBallServed.Invoke();
+        if (GameHandler.state.Equals(GameState.SERVE))
+        {
+            GameObject ball = Instantiate(BallPrefab, (reflectorShield.transform.localPosition + new Vector3(0f, 0f, 0.1f)), reflectorShield.transform.localRotation).gameObject;
+            Rigidbody ballRigidbody = ball.transform.Find("Ball").GetComponent<Rigidbody>();
+            ballRigidbody.velocity = transform.TransformDirection(new Vector3(0f, 0f, 1.5f));
+            this.OnBallServed.Invoke();
+        }
+
     }
 
     // Start is called before the first frame update
@@ -56,6 +60,6 @@ public class BallGenerator : MonoBehaviour, IMixedRealityPointerHandler
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

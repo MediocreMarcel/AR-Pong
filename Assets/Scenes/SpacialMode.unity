@@ -332,7 +332,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 429bd748d808857428c26b9b40d7a4be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  state: 0
   GoOverlayPinchToThrow: {fileID: 920750424}
   GoGameOverUi: {fileID: 631955774}
   GoPointsText: {fileID: 316885409}
@@ -363,9 +362,10 @@ GameObject:
   - component: {fileID: 74101590}
   - component: {fileID: 74101589}
   - component: {fileID: 74101588}
+  - component: {fileID: 74101591}
   m_Layer: 0
   m_Name: TestWall4
-  m_TagString: Untagged
+  m_TagString: Backwall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -448,6 +448,33 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 74101586}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &74101591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 74101586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc54ad1465fda6f4eba7c557e90c046f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnEndzoneCollision:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 64951991}
+        m_TargetAssemblyTypeName: GameHandler, Assembly-CSharp
+        m_MethodName: onBallDestroyed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &91864026
 GameObject:
   m_ObjectHideFlags: 0
@@ -919,13 +946,16 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 445215291}
+  - component: {fileID: 445215294}
+  - component: {fileID: 445215293}
+  - component: {fileID: 445215292}
   m_Layer: 0
-  m_Name: TestRoom (1)
+  m_Name: BackWallRoom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &445215291
 Transform:
   m_ObjectHideFlags: 0
@@ -947,6 +977,77 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &445215292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 445215290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91ba46e7730c7ea4094cfddc803af5ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TrackedObject: {fileID: 1037842227}
+--- !u!114 &445215293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 445215290}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4479a0bd44d822241a4c5f4890c481c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  updateLinkedTransform: 0
+  moveLerpTime: 0.1
+  rotateLerpTime: 0.1
+  scaleLerpTime: 0
+  maintainScaleOnInitialization: 1
+  smoothing: 1
+  lifetime: 0
+  orientationType: 1
+  faceTrackedObjectWhileClamped: 1
+  faceUserDefinedTargetTransform: 0
+  targetToFace: {fileID: 0}
+  pivotAxis: 7
+  minDistance: 0.3
+  maxDistance: 0.9
+  defaultDistance: 0.7
+  maxViewHorizontalDegrees: 30
+  maxViewVerticalDegrees: 20
+  reorientWhenOutsideParameters: 1
+  orientToControllerDeadzoneDegrees: 60
+  ignoreAngleClamp: 0
+  ignoreDistanceClamp: 0
+  ignoreReferencePitchAndRoll: 0
+  pitchOffset: 0
+  verticalMaxDistance: 0
+  angularClampMode: 0
+  tetherAngleSteps: 6
+  boundsScaler: 1
+--- !u!114 &445215294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 445215290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b55691ad5b034fe6966763a6e23818d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trackedTargetType: 0
+  trackedHandedness: 3
+  trackedHandJoint: 2
+  transformOverride: {fileID: 0}
+  additionalOffset: {x: 0, y: 0, z: 0}
+  additionalRotation: {x: 0, y: 0, z: 0}
+  updateSolvers: 1
 --- !u!1 &551570641
 GameObject:
   m_ObjectHideFlags: 0
@@ -1787,7 +1888,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 1
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -0.027486766, y: -0.0022691963, z: -0.029010268, w: -0.019282438}
+  m_margin: {x: -0.044011958, y: -0.01617131, z: -0.04594886, w: -0.019282438}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   _SortingLayer: 0
@@ -2844,7 +2945,7 @@ Transform:
   m_GameObject: {fileID: 1162942762}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.016, y: 0, z: 0.008000016}
-  m_LocalScale: {x: 3, y: 2.5, z: 1}
+  m_LocalScale: {x: 3, y: 3.34775, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1598960814}
@@ -3262,7 +3363,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1337474842}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0173, y: -0.0134, z: 0}
+  m_LocalPosition: {x: 0.0173, y: -0.0243, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3551,9 +3652,10 @@ GameObject:
   - component: {fileID: 1436752203}
   - component: {fileID: 1436752202}
   - component: {fileID: 1436752201}
+  - component: {fileID: 1436752204}
   m_Layer: 0
   m_Name: TestWall3
-  m_TagString: Untagged
+  m_TagString: Backwall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3636,6 +3738,33 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1436752199}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1436752204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1436752199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc54ad1465fda6f4eba7c557e90c046f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnEndzoneCollision:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 64951991}
+        m_TargetAssemblyTypeName: GameHandler, Assembly-CSharp
+        m_MethodName: onBallDestroyed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1476638979
 GameObject:
   m_ObjectHideFlags: 0
@@ -3924,9 +4053,10 @@ GameObject:
   - component: {fileID: 1530729392}
   - component: {fileID: 1530729391}
   - component: {fileID: 1530729390}
+  - component: {fileID: 1530729393}
   m_Layer: 0
   m_Name: Floor
-  m_TagString: Untagged
+  m_TagString: Backwall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4009,6 +4139,33 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1530729388}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1530729393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1530729388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc54ad1465fda6f4eba7c557e90c046f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnEndzoneCollision:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 64951991}
+        m_TargetAssemblyTypeName: GameHandler, Assembly-CSharp
+        m_MethodName: onBallDestroyed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1573181470
 GameObject:
   m_ObjectHideFlags: 0
@@ -4132,8 +4289,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1598960813}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.032, y: 0.032, z: 0.01}
+  m_LocalPosition: {x: 6.2088e-10, y: 0, z: 0}
+  m_LocalScale: {x: 0.048966404, y: 0.032, z: 0.01}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1162942763}
@@ -5000,9 +5157,10 @@ GameObject:
   - component: {fileID: 1722859568}
   - component: {fileID: 1722859567}
   - component: {fileID: 1722859566}
+  - component: {fileID: 1722859569}
   m_Layer: 0
   m_Name: TestWall2
-  m_TagString: Untagged
+  m_TagString: Backwall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5085,6 +5243,33 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1722859564}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1722859569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1722859564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc54ad1465fda6f4eba7c557e90c046f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnEndzoneCollision:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 64951991}
+        m_TargetAssemblyTypeName: GameHandler, Assembly-CSharp
+        m_MethodName: onBallDestroyed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1794467022
 GameObject:
   m_ObjectHideFlags: 0
@@ -5655,9 +5840,10 @@ GameObject:
   - component: {fileID: 1922914256}
   - component: {fileID: 1922914255}
   - component: {fileID: 1922914254}
+  - component: {fileID: 1922914257}
   m_Layer: 0
   m_Name: Celing
-  m_TagString: Untagged
+  m_TagString: Backwall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5740,6 +5926,33 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1922914252}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1922914257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1922914252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc54ad1465fda6f4eba7c557e90c046f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnEndzoneCollision:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 64951991}
+        m_TargetAssemblyTypeName: GameHandler, Assembly-CSharp
+        m_MethodName: onBallDestroyed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2058279599
 GameObject:
   m_ObjectHideFlags: 0
@@ -6132,9 +6345,10 @@ GameObject:
   - component: {fileID: 2114701317}
   - component: {fileID: 2114701316}
   - component: {fileID: 2114701315}
+  - component: {fileID: 2114701318}
   m_Layer: 0
   m_Name: TestWall1
-  m_TagString: Untagged
+  m_TagString: Backwall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6217,3 +6431,30 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2114701313}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &2114701318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2114701313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc54ad1465fda6f4eba7c557e90c046f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnEndzoneCollision:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 64951991}
+        m_TargetAssemblyTypeName: GameHandler, Assembly-CSharp
+        m_MethodName: onBallDestroyed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

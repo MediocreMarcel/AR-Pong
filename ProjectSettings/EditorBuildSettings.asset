@@ -11,6 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SpacialMode.unity
     guid: bf78b851708061542b59eab64ec9fba6
+  - enabled: 1
+    path: Assets/Scenes/Highscores.unity
+    guid: 27cc4bb6e45fb224f993deb08a665643
   m_configObjects:
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: d0289dae6f8a1734fa314ab09521578b, type: 2}
     com.unity.xr.openxr.settings4: {fileID: 11400000, guid: 9783ee6bdddc59d47b72a19e7e4df60b, type: 2}

@@ -14,4 +14,9 @@ public class MainMenuHandler : MonoBehaviour
     {
         
     }
+
+    public void OpenHighscores()
+    {
+        SceneManager.LoadScene("Highscores");
+    }
 }
