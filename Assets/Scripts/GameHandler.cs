@@ -14,8 +14,12 @@ public class GameHandler : MonoBehaviour
     public static GameState state = GameState.SERVE;
     public static GameMode mode;
     public static List<HighScoreEntry> HighScores = new List<HighScoreEntry>();
-
+    public int pointmulitplier = 1;
+    public List<GameObject> powerUpList = new List<GameObject>();
+    public float PowerUpInterval = 5f;
     int points = 0;
+    private float distanceToWall = 0;
+    RaycastHit hit;
 
     [SerializeField] GameObject GoOverlayPinchToThrow;
 
@@ -25,11 +29,14 @@ public class GameHandler : MonoBehaviour
     [SerializeField] GameObject GoPointsText;
     TMP_Text TextPoints;
 
+    [SerializeField] GameObject PowerUpPrefabReflectorShield, PowerUpPrefabPointMultiplier;
+
     private void Start()
     {
         TextGameOver = GoGameOverUi.transform.GetChild(0).GetComponent<TMP_Text>();
         TextPoints = GoPointsText.GetComponent<TMP_Text>();
         mode = SceneManager.GetActiveScene().name.Equals("SpacialMode") ? GameMode.SpacialMode : GameMode.AreaMode;
+        Restart();  
     }
 
     public void SwitchToMainMenu()
@@ -38,7 +45,7 @@ public class GameHandler : MonoBehaviour
     }
 
     public void Restart()
-    {
+    {  
         this.points = 0;
         this.UpdatePointOverlay();
         this.GoGameOverUi.SetActive(false);
@@ -51,6 +58,7 @@ public class GameHandler : MonoBehaviour
         GameHandler.state = GameState.PLAY;
         this.GoOverlayPinchToThrow.SetActive(false);
         this.GoPointsText.SetActive(true);
+        InvokeRepeating("SpawnPowerUps", 2f, PowerUpInterval);
     }
 
     public void onBallDestroyed()
@@ -58,6 +66,8 @@ public class GameHandler : MonoBehaviour
         GameHandler.state = GameState.GAME_OVER;
         this.GoPointsText.SetActive(false);
         this.GoGameOverUi.SetActive(true);
+        CancelInvoke("SpawnPowerUps");
+        foreach (GameObject powerUp in powerUpList) { Destroy(powerUp); }
 
         int scorePosition = this.PlaceHighScore(new HighScoreEntry(this.points, GameHandler.mode));
 
@@ -74,7 +84,7 @@ public class GameHandler : MonoBehaviour
 
     public void IncreasePoints()
     {
-        this.points++;
+        this.points = this.points + (1 * pointmulitplier);
         this.UpdatePointOverlay();
     }
 
@@ -97,5 +107,47 @@ public class GameHandler : MonoBehaviour
     private void UpdatePointOverlay()
     {
         this.TextPoints.text = $"Points: {this.points}";
+    }
+    
+    private void SpawnPowerUps()
+    {
+        Debug.Log(powerUpList.Count);
+
+        if (powerUpList.Count < 6 && distanceToWall >= 1.5f) 
+        {
+            float x = Random.Range(0.1f, 0.90f);
+            float y = Random.Range(0.1f, 0.90f);
+            //Vector3 pos = new Vector3(x, y, distanceToWall / 1.5f);
+            Vector3 pos = new Vector3(0.5f, 0.5f, distanceToWall / 1.5f);
+            pos = Camera.main.ViewportToWorldPoint(pos);
+
+            float powerUpType = Random.Range(0f, 1f);
+            Physics.Raycast(Camera.main.transform.transform.position, Camera.main.transform.forward, out hit);
+           
+            if (powerUpType <= 0.5f) //Point Multiplier Buff
+            {
+                GameObject realPowerUp = Instantiate(PowerUpPrefabPointMultiplier, pos, Camera.main.transform.rotation).gameObject;
+                powerUpList.Add(realPowerUp);
+            }
+            else //ReflectorShield Buff
+            {
+                GameObject realPowerUp = Instantiate(PowerUpPrefabReflectorShield, pos, Camera.main.transform.rotation).gameObject;
+                powerUpList.Add(realPowerUp);
+            }
+        }
+    }
+    
+    private void Update()
+    {
+        //Cast a Ray to determine the current distance from the next wall that is facing the player
+        Physics.Raycast(Camera.main.transform.transform.position, Camera.main.transform.forward, out hit);
+
+        if (hit.transform.gameObject.layer.Equals(13) || hit.transform.gameObject.layer.Equals(31)) 
+        {
+            //Debug.Log("success distance: "+ hit.distance);
+            distanceToWall = hit.distance;
+        }
+            
+        
     }
 }

@@ -3,6 +3,7 @@ using Microsoft.MixedReality.Toolkit.Input;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -41,6 +42,9 @@ public class BallGenerator : MonoBehaviour, IMixedRealityPointerHandler
 
     public void OnPointerUp(MixedRealityPointerEventData eventData)
     {
+        Debug.Log("PointerUp1");
+        Debug.Log(GameHandler.state);
+        Debug.Log(GameHandler.state.Equals(GameState.SERVE));
         if (GameHandler.state.Equals(GameState.SERVE))
         {
             GameObject ball = Instantiate(BallPrefab, (reflectorShield.transform.localPosition + new Vector3(0f, 0f, 0.1f)), reflectorShield.transform.localRotation).gameObject;

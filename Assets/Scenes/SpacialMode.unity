@@ -135,9 +135,9 @@ GameObject:
   - component: {fileID: 48186627}
   - component: {fileID: 48186626}
   - component: {fileID: 48186625}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: TestWall4
-  m_TagString: Untagged
+  m_TagString: Backwall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -315,7 +315,7 @@ GameObject:
   - component: {fileID: 64951991}
   m_Layer: 0
   m_Name: Game
-  m_TagString: Untagged
+  m_TagString: GameController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -332,9 +332,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 429bd748d808857428c26b9b40d7a4be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pointmulitplier: 1
+  powerUpList: []
+  PowerUpInterval: 2
   GoOverlayPinchToThrow: {fileID: 920750424}
   GoGameOverUi: {fileID: 631955774}
   GoPointsText: {fileID: 316885409}
+  PowerUpPrefabReflectorShield: {fileID: 3131557635942423911, guid: 01e4159773620834580ddbb7ad58b5b6, type: 3}
+  PowerUpPrefabPointMultiplier: {fileID: 3131557635942423911, guid: 4568748fb8ac3964890e885f8007770b, type: 3}
 --- !u!4 &64951992
 Transform:
   m_ObjectHideFlags: 0
@@ -571,9 +576,9 @@ GameObject:
   - component: {fileID: 197813048}
   - component: {fileID: 197813047}
   - component: {fileID: 197813046}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: TestWall1
-  m_TagString: Untagged
+  m_TagString: Backwall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1468,9 +1473,9 @@ GameObject:
   - component: {fileID: 582279017}
   - component: {fileID: 582279016}
   - component: {fileID: 582279015}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: TestWall3
-  m_TagString: Untagged
+  m_TagString: Backwall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2373,9 +2378,9 @@ GameObject:
   - component: {fileID: 791286965}
   - component: {fileID: 791286964}
   - component: {fileID: 791286963}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Floor
-  m_TagString: Untagged
+  m_TagString: Backwall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4178,9 +4183,9 @@ GameObject:
   - component: {fileID: 1573181474}
   - component: {fileID: 1573181473}
   - component: {fileID: 1573181472}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: TestWall2
-  m_TagString: Untagged
+  m_TagString: Backwall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4929,9 +4934,9 @@ GameObject:
   - component: {fileID: 1645103414}
   - component: {fileID: 1645103413}
   - component: {fileID: 1645103412}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Celing
-  m_TagString: Untagged
+  m_TagString: Backwall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

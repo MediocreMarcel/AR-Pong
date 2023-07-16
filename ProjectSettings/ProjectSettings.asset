@@ -612,7 +612,7 @@ PlayerSettings:
   scriptingDefineSymbols:
     Android: USE_INPUT_SYSTEM_POSE_CONTROL;USE_INPUT_SYSTEM_POSE_CONTROL;USE_INPUT_SYSTEM_POSE_CONTROL;USE_INPUT_SYSTEM_POSE_CONTROL
     Standalone: USE_INPUT_SYSTEM_POSE_CONTROL;USE_INPUT_SYSTEM_POSE_CONTROL;USE_INPUT_SYSTEM_POSE_CONTROL;USE_INPUT_SYSTEM_POSE_CONTROL
-    Windows Store Apps: USE_INPUT_SYSTEM_POSE_CONTROL;USE_INPUT_SYSTEM_POSE_CONTROL;USE_INPUT_SYSTEM_POSE_CONTROL;USE_INPUT_SYSTEM_POSE_CONTROL
+    Windows Store Apps: release;USE_INPUT_SYSTEM_POSE_CONTROL
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}
@@ -632,8 +632,8 @@ PlayerSettings:
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
   metroPackageName: de.htw-berlin.fb4.AR.ArPong
-  metroPackageVersion: 1.0.0.0
-  metroCertificatePath: D:\Unity\AR Pong\Assets\WSATestCertificate.pfx
+  metroPackageVersion: 1.0.2.0
+  metroCertificatePath: Assets/WSATestCertificate.pfx
   metroCertificatePassword: 
   metroCertificateSubject: DefaultCompany
   metroCertificateIssuer: DefaultCompany
