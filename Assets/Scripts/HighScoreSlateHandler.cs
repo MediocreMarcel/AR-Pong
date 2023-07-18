@@ -29,7 +29,8 @@ public class HighScoreSlateHandler : MonoBehaviour
         foreach (HighScoreEntry entry in highscores)
         {
             highscoreText.Append($"{entry.Score}\t");
-            highscoreText.Append(entry.Mode.Equals(GameMode.AreaMode) ? "Area" : "Spacial" + " Mode\n");
+            highscoreText.Append(entry.Mode.Equals(GameMode.AreaMode) ? "   Area" : "Spacial");
+            highscoreText.Append(" Mode\n");
         }
         if (highscoreText.Length > 12)
         {

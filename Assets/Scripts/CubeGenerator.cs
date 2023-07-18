@@ -42,17 +42,24 @@ public class BallGenerator : MonoBehaviour, IMixedRealityPointerHandler
 
     public void OnPointerUp(MixedRealityPointerEventData eventData)
     {
-        Debug.Log("PointerUp1");
-        Debug.Log(GameHandler.state);
-        Debug.Log(GameHandler.state.Equals(GameState.SERVE));
         if (GameHandler.state.Equals(GameState.SERVE))
         {
-            GameObject ball = Instantiate(BallPrefab, (reflectorShield.transform.localPosition + new Vector3(0f, 0f, 0.1f)), reflectorShield.transform.localRotation).gameObject;
+            Vector3 reflectorShieldPos = reflectorShield.transform.position;
+            Vector3 reflectorShieldDirection = reflectorShield.transform.forward;
+            Quaternion reflectorShieldRotation = reflectorShield.transform.rotation;
+            float spawnDistance = 0.15f;
+
+            Vector3 spawnPos = reflectorShieldPos + reflectorShieldDirection * spawnDistance;
+
+            GameObject ball = Instantiate(BallPrefab, spawnPos, reflectorShieldRotation).gameObject;
             Rigidbody ballRigidbody = ball.transform.Find("Ball").GetComponent<Rigidbody>();
-            ballRigidbody.velocity = transform.TransformDirection(new Vector3(0f, 0f, 1.5f));
+            ballRigidbody.velocity = transform.TransformDirection(new Vector3(0f, 0f, 1.1f));
             this.OnBallServed.Invoke();
         }
-
+        if (GameHandler.state.Equals(GameState.PLACE))
+        {
+            Debug.Log("I would place");
+        }
     }
 
     // Start is called before the first frame update
@@ -64,6 +71,6 @@ public class BallGenerator : MonoBehaviour, IMixedRealityPointerHandler
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 }

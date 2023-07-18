@@ -42,7 +42,6 @@ public class CubeGenerator : MonoBehaviour, IMixedRealityPointerHandler
 
     public void OnPointerUp(MixedRealityPointerEventData eventData)
     {
-        Debug.Log("Pointer up");
         GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
         cube.transform.localPosition = reflectorShield.transform.localPosition;
         cube.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);

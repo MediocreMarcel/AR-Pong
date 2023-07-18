@@ -39,7 +39,7 @@ MonoBehaviour:
   spatialAwarenessSystemType:
     reference: Microsoft.MixedReality.Toolkit.SpatialAwareness.MixedRealitySpatialAwarenessSystem,
       Microsoft.MixedReality.Toolkit.Services.SpatialAwarenessSystem
-  spatialAwarenessSystemProfile: {fileID: 11400000, guid: 88c18c596a016014687e877a9f5570fa, type: 2}
+  spatialAwarenessSystemProfile: {fileID: 11400000, guid: 788162376f08fde4993003c20d4776ad, type: 2}
   diagnosticsSystemProfile: {fileID: 11400000, guid: 478436bd1083882479a52d067e98e537, type: 2}
   enableDiagnosticsSystem: 0
   diagnosticsSystemType:

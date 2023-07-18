@@ -28,12 +28,20 @@ public class BallCollionDetector : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+
+        //When playing AreaMode -> GameOver if Ball hits anything besides designated Wall or Reflector Shield
+        if (GameHandler.mode.Equals(GameMode.AreaMode) && !collision.gameObject.layer.Equals(14) && !collision.gameObject.tag.Equals("ReflectorShield"))
+        {
+            Destroy(gameObject.transform.parent.gameObject);
+            GameHandler.onBallDestroyed();
+        }
+
         Vector3 newDirection = Vector3.Reflect(transform.forward, collision.contacts[0].normal);
         //Rotate bullet to new direction
         transform.rotation = Quaternion.LookRotation(newDirection);
 
         Rigidbody ballRigidbody = GetComponent<Rigidbody>();
-        ballRigidbody.velocity = transform.TransformDirection(new Vector3(0f, 0f, 1.5f));
+        ballRigidbody.velocity = transform.TransformDirection(new Vector3(0f, 0f, 1.1f));
         if (collision.gameObject.tag.Equals("ReflectorShield"))
         {
             this.GameHandler.IncreasePoints();
@@ -42,19 +50,21 @@ public class BallCollionDetector : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        GameObject parentObjectForRemoval = other.gameObject.transform.parent.gameObject;
         if (other.gameObject.tag.Equals("PowerUpReflectorShield"))
         {
             this.ReflectorShield.transform.localScale += scaleChange;
             Invoke("RevertScaleChange", PowerUpUptime);
-            GameHandler.GetComponent<GameHandler>().powerUpList.Remove(other.gameObject);
-            Destroy(other.gameObject);
+            GameHandler.powerUpList.Remove(parentObjectForRemoval);
+
+            Destroy(parentObjectForRemoval);
         }
         if (other.gameObject.tag.Equals("PowerUpDoublePoints"))
         {
             GameHandler.GetComponent<GameHandler>().pointmulitplier = GameHandler.GetComponent<GameHandler>().pointmulitplier * 2;
             Invoke("RevertPointMultiplier", PowerUpUptime * 3);
-            GameHandler.GetComponent<GameHandler>().powerUpList.Remove(other.gameObject);
-            Destroy(other.gameObject);
+            GameHandler.powerUpList.Remove(parentObjectForRemoval);
+            Destroy(parentObjectForRemoval);
         }
     }
     private void RevertScaleChange()

@@ -12,7 +12,7 @@ public class MainMenuHandler : MonoBehaviour
 
     public void StartAreaMode()
     {
-        
+        SceneManager.LoadScene("AreaMode");
     }
 
     public void OpenHighscores()
