@@ -28,9 +28,13 @@ public class BallCollionDetector : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-
         //When playing AreaMode -> GameOver if Ball hits anything besides designated Wall or Reflector Shield
-        if (GameHandler.mode.Equals(GameMode.AreaMode) && !collision.gameObject.layer.Equals(14) && !collision.gameObject.tag.Equals("ReflectorShield"))
+        //if (GameHandler.mode.Equals(GameMode.AreaMode) && !collision.gameObject.layer.Equals(14) && !collision.gameObject.tag.Equals("ReflectorShield") && !collision.gameObject.tag.Equals("Backwall"))
+        //{
+        //    Destroy(gameObject.transform.parent.gameObject);
+        //    GameHandler.onBallDestroyed();
+        //}
+        if (GameHandler.mode.Equals(GameMode.AreaMode) && collision.gameObject.layer.Equals(31))
         {
             Destroy(gameObject.transform.parent.gameObject);
             GameHandler.onBallDestroyed();

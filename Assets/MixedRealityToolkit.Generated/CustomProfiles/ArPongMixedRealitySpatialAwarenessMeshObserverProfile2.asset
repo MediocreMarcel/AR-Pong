@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d561f5f963b45674aa423435fb820879, type: 3}
-  m_Name: ArPongMixedRealitySpatialAwarenessMeshObserverProfile
+  m_Name: ArPongMixedRealitySpatialAwarenessMeshObserverProfile2
   m_EditorClassIdentifier: 
   isCustomProfile: 1
   startupBehavior: 0
@@ -21,9 +21,9 @@ MonoBehaviour:
   meshPhysicsLayer: 31
   levelOfDetail: 255
   trianglesPerCubicMeter: 0
-  recalculateNormals: 0
-  displayOption: 2
-  visibleMaterial: {fileID: 2100000, guid: ef8b2cc31ab96154f8b07f400c40f24a, type: 2}
+  recalculateNormals: 1
+  displayOption: 0
+  visibleMaterial: {fileID: 0}
   occlusionMaterial: {fileID: 2100000, guid: a809c7ea182b699409443d46d5b42435, type: 2}
   physicsMaterial: {fileID: 0}
   runtimeSpatialMeshPrefab: {fileID: 0}
