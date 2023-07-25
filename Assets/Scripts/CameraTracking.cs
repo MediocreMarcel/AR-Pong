@@ -4,15 +4,9 @@ using UnityEngine;
 
 public class CameraTracking : MonoBehaviour
 {
-
     [SerializeField] private GameObject TrackedObject;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
+    
+    //Update position of the Backwall behind the player
     void Update()
     {
         this.transform.position = TrackedObject.transform.position;

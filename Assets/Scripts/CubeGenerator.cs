@@ -7,41 +7,22 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class BallGenerator : MonoBehaviour, IMixedRealityPointerHandler
+public class CubeGenerator : MonoBehaviour, IMixedRealityPointerHandler
 {
     public UnityEvent OnBallServed;
     [SerializeField] private GameObject BallPrefab;
     [SerializeField] private GameObject reflectorShield;
 
-    private void OnEnable()
+    // Start is called before the first frame update
+    void Start()
     {
         CoreServices.InputSystem?.RegisterHandler<IMixedRealityPointerHandler>(this);
     }
 
-    private void OnDisable()
-    {
-        CoreServices.InputSystem?.UnregisterHandler<IMixedRealityPointerHandler>(this);
-    }
-
-
-
-
-    public void OnPointerClicked(MixedRealityPointerEventData eventData)
-    {
-    }
-
-    public void OnPointerDown(MixedRealityPointerEventData eventData)
-    {
-        //throw new System.NotImplementedException();
-    }
-
-    public void OnPointerDragged(MixedRealityPointerEventData eventData)
-    {
-        //throw new System.NotImplementedException();
-    }
-
+    //On start pinch motion spawn the ballprefab and "shoot" it in direction of the reflector shield  
     public void OnPointerUp(MixedRealityPointerEventData eventData)
     {
+        //Only spawn ball if you are in the correct GameState
         if (GameHandler.state.Equals(GameState.SERVE))
         {
             Vector3 reflectorShieldPos = reflectorShield.transform.position;
@@ -56,20 +37,28 @@ public class BallGenerator : MonoBehaviour, IMixedRealityPointerHandler
             ballRigidbody.velocity = transform.TransformDirection(new Vector3(0f, 0f, 1.1f));
             this.OnBallServed.Invoke();
         }
-        if (GameHandler.state.Equals(GameState.PLACE))
-        {
-            Debug.Log("I would place");
-        }
     }
 
-    // Start is called before the first frame update
-    void Start()
+    private void OnEnable()
     {
         CoreServices.InputSystem?.RegisterHandler<IMixedRealityPointerHandler>(this);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnDisable()
+    {
+        CoreServices.InputSystem?.UnregisterHandler<IMixedRealityPointerHandler>(this);
+    }
+
+    public void OnPointerClicked(MixedRealityPointerEventData eventData)
+    {
+    }
+
+    public void OnPointerDown(MixedRealityPointerEventData eventData)
+    {
+        
+    }
+
+    public void OnPointerDragged(MixedRealityPointerEventData eventData)
     {
         
     }

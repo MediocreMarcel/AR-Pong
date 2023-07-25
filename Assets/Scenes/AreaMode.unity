@@ -3931,7 +3931,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4592bc8b89cfe34baef8dda0c9d5c9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reflectorShild: {fileID: 910412456}
+  reflectorShield: {fileID: 910412456}
 --- !u!65 &910412458
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4019,7 +4019,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 910412456}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e7ce176acee3e049a51f02ec146ec8d, type: 3}
+  m_Script: {fileID: 11500000, guid: 53afcb37eadc7a84e878ded3da78c5e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   OnBallServed:

@@ -7,23 +7,17 @@ using UnityEngine;
 public class HandTracker : MonoBehaviour
 {
     private Handedness handedness = Handedness.Right;
-    [SerializeField] private GameObject reflectorShild;
+    [SerializeField] private GameObject reflectorShield;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
+    //Update the position and rotation of the reflector shield based on the tracked hand position
     void Update()
     {
         MixedRealityPose pose;
         if (HandJointUtils.TryGetJointPose(TrackedHandJoint.Palm, this.handedness, out pose))
         {
-            reflectorShild.transform.localPosition = pose.Position;
-            reflectorShild.transform.rotation = pose.Rotation;
-            reflectorShild.transform.rotation = reflectorShild.transform.rotation * Quaternion.Euler(new Vector3(90, 0, 0));
+            reflectorShield.transform.localPosition = pose.Position;
+            reflectorShield.transform.rotation = pose.Rotation;
+            reflectorShield.transform.rotation = reflectorShield.transform.rotation * Quaternion.Euler(new Vector3(90, 0, 0));
         }
     }
 }

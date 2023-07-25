@@ -6,12 +6,11 @@ using UnityEngine.Events;
 public class BallCollionDetector : MonoBehaviour
 {
     public UnityEvent OnPointCollission;
-    GameHandler GameHandler;
-    GameObject ReflectorShield;
-    float PowerUpUptime;
-
+    private GameHandler GameHandler;
+    private GameObject ReflectorShield;
+    private float PowerUpUptime;
     private Vector3 scaleChange;
-    // Start is called before the first frame update
+
     void Start()
     {
         GameHandler = GameObject.Find("Game").GetComponent<GameHandler>();
@@ -20,20 +19,10 @@ public class BallCollionDetector : MonoBehaviour
         PowerUpUptime = 15f;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
+    //Ball and Walls collision handler
     private void OnCollisionEnter(Collision collision)
     {
-        //When playing AreaMode -> GameOver if Ball hits anything besides designated Wall or Reflector Shield
-        //if (GameHandler.mode.Equals(GameMode.AreaMode) && !collision.gameObject.layer.Equals(14) && !collision.gameObject.tag.Equals("ReflectorShield") && !collision.gameObject.tag.Equals("Backwall"))
-        //{
-        //    Destroy(gameObject.transform.parent.gameObject);
-        //    GameHandler.onBallDestroyed();
-        //}
+        //While playing in AreaMode collisions with anything but the designated playarea will kill the Ball
         if (GameHandler.mode.Equals(GameMode.AreaMode) && collision.gameObject.layer.Equals(31))
         {
             Destroy(gameObject.transform.parent.gameObject);
@@ -41,20 +30,23 @@ public class BallCollionDetector : MonoBehaviour
         }
 
         Vector3 newDirection = Vector3.Reflect(transform.forward, collision.contacts[0].normal);
-        //Rotate bullet to new direction
         transform.rotation = Quaternion.LookRotation(newDirection);
 
         Rigidbody ballRigidbody = GetComponent<Rigidbody>();
         ballRigidbody.velocity = transform.TransformDirection(new Vector3(0f, 0f, 1.1f));
+
         if (collision.gameObject.tag.Equals("ReflectorShield"))
         {
             this.GameHandler.IncreasePoints();
         }
     }
 
+    //Ball and PowerUp collision handler
     private void OnTriggerEnter(Collider other)
     {
         GameObject parentObjectForRemoval = other.gameObject.transform.parent.gameObject;
+
+        //On colliding with reflector shield powerup, increase size by a flat amount and remove the increase after a duration defined by PowerUpUptime
         if (other.gameObject.tag.Equals("PowerUpReflectorShield"))
         {
             this.ReflectorShield.transform.localScale += scaleChange;
@@ -63,10 +55,11 @@ public class BallCollionDetector : MonoBehaviour
 
             Destroy(parentObjectForRemoval);
         }
+        //On colliding with double points powerup, double the current multiplier applied on gained points and remove the increase after a duration defined by PowerUpUptime
         if (other.gameObject.tag.Equals("PowerUpDoublePoints"))
         {
             GameHandler.GetComponent<GameHandler>().pointmulitplier = GameHandler.GetComponent<GameHandler>().pointmulitplier * 2;
-            Invoke("RevertPointMultiplier", PowerUpUptime * 3);
+            Invoke("RevertPointMultiplier", PowerUpUptime);
             GameHandler.powerUpList.Remove(parentObjectForRemoval);
             Destroy(parentObjectForRemoval);
         }

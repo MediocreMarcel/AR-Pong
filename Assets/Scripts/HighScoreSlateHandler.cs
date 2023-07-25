@@ -22,6 +22,7 @@ public class HighScoreSlateHandler : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
 
+    //Simple StringBuilder for the highscore display
     private void SetHighscoreText()
     {
         List<HighScoreEntry> highscores = GameHandler.HighScores;
@@ -36,6 +37,5 @@ public class HighScoreSlateHandler : MonoBehaviour
         {
             TextHighscore.SetText(highscoreText);
         }
-
     }
 }
