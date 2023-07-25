@@ -13,15 +13,20 @@ public class CubeGenerator : MonoBehaviour, IMixedRealityPointerHandler
     [SerializeField] private GameObject BallPrefab;
     [SerializeField] private GameObject reflectorShield;
 
-    // Start is called before the first frame update
     void Start()
     {
+        //Register this class as Pointer Handler to get poses like the pinch gesture
         CoreServices.InputSystem?.RegisterHandler<IMixedRealityPointerHandler>(this);
     }
 
-    //On start pinch motion spawn the ballprefab and "shoot" it in direction of the reflector shield  
+    /// <summary>
+    /// Handles the gester pointer up, which is equivalent to "after pinch".
+    /// Method will spawn an instance of the ballprefab and "shoot" it in direction, in which the reflector shield is aimed, if the game is in the state "Serve".
+    /// </summary>
+    /// <param name="eventData">MRTK Provieded event data</param>
     public void OnPointerUp(MixedRealityPointerEventData eventData)
     {
+        //On start pinch motion spawn the ballprefab and "shoot" it in direction of the reflector shield  
         //Only spawn ball if you are in the correct GameState
         if (GameHandler.state.Equals(GameState.SERVE))
         {
@@ -41,23 +46,28 @@ public class CubeGenerator : MonoBehaviour, IMixedRealityPointerHandler
 
     private void OnEnable()
     {
+        //Re-Register this class as Pointer Handler to get poses like the pinch gesture if enabled
         CoreServices.InputSystem?.RegisterHandler<IMixedRealityPointerHandler>(this);
     }
 
     private void OnDisable()
     {
+        //Deregister this class as Pointer Handler if disabled
         CoreServices.InputSystem?.UnregisterHandler<IMixedRealityPointerHandler>(this);
     }
 
+    //Not used
     public void OnPointerClicked(MixedRealityPointerEventData eventData)
     {
     }
 
+    //Not used
     public void OnPointerDown(MixedRealityPointerEventData eventData)
     {
         
     }
 
+    //Not used
     public void OnPointerDragged(MixedRealityPointerEventData eventData)
     {
         

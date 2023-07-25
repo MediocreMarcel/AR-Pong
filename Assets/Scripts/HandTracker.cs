@@ -9,9 +9,10 @@ public class HandTracker : MonoBehaviour
     private Handedness handedness = Handedness.Right;
     [SerializeField] private GameObject reflectorShield;
 
-    //Update the position and rotation of the reflector shield based on the tracked hand position
+    
     void Update()
     {
+        //Update the position and rotation of the reflector shield based on the tracked hand position on every frame
         MixedRealityPose pose;
         if (HandJointUtils.TryGetJointPose(TrackedHandJoint.Palm, this.handedness, out pose))
         {

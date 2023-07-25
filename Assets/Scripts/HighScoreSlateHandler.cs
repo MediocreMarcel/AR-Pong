@@ -17,12 +17,17 @@ public class HighScoreSlateHandler : MonoBehaviour
         this.SetHighscoreText();
     }
 
+    /// <summary>
+    /// Switches to main menu scene
+    /// </summary>
     public void OpenMainMenu()
     {
         SceneManager.LoadScene("MainMenu");
     }
 
-    //Simple StringBuilder for the highscore display
+    /// <summary>
+    /// Updates the UI to display the current highscores
+    /// </summary>
     private void SetHighscoreText()
     {
         List<HighScoreEntry> highscores = GameHandler.HighScores;

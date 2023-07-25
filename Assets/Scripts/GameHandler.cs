@@ -38,7 +38,7 @@ public class GameHandler : MonoBehaviour
     TMP_Text TextPoints;
     [SerializeField] GameObject PlacementDoneOverlay;
     [SerializeField] GameObject PowerUpPrefabReflectorShield, PowerUpPrefabPointMultiplier;
-    
+
 
     private void Start()
     {
@@ -50,17 +50,22 @@ public class GameHandler : MonoBehaviour
         TextGameOver = GoGameOverUi.transform.GetChild(0).GetComponent<TMP_Text>();
         TextPoints = GoPointsText.GetComponent<TMP_Text>();
         mode = SceneManager.GetActiveScene().name.Equals("SpacialMode") ? GameMode.SpacialMode : GameMode.AreaMode;
-        
-        Restart();  
+
+        Restart();
     }
 
+    /// <summary>
+    /// Switches to Main Menu Scene
+    /// </summary>
     public void SwitchToMainMenu()
     {
         Destroy(PlayZone);
         SceneManager.LoadScene("MainMenu");
     }
 
-    //Revert GameObjects, Points etc. into a state were the player is able to start a new game depending on the chosen GameMode
+    /// <summary>
+    /// Revert GameObjects, Points etc. into a state were the player is able to start a new game depending on the chosen GameMode
+    /// </summary>
     public void Restart()
     {
         this.points = 0;
@@ -78,7 +83,7 @@ public class GameHandler : MonoBehaviour
         {
             GameHandler.state = GameState.PLACE;
             this.PlacementDoneOverlay.SetActive(true);
-            if(PlayZone == null)
+            if (PlayZone == null)
             {
                 SpawnPlayZone();
             }
@@ -89,8 +94,10 @@ public class GameHandler : MonoBehaviour
             }
         }
     }
-     
-    //Spawns the PlayZonePrefab infront of the current camera position
+
+    /// <summary>
+    /// Spawns the PlayZonePrefab infront of the current camera position
+    /// </summary>
     private void SpawnPlayZone()
     {
         Vector3 CameraPos = Camera.main.transform.position;
@@ -103,7 +110,9 @@ public class GameHandler : MonoBehaviour
         PlayZone = Instantiate(PlayableWall, spawnPos, CameraRotation).gameObject;
     }
 
-    //Handle overlays and gamestate when the ball is served
+    /// <summary>
+    /// Handle overlays and gamestate when the ball is served
+    /// </summary>
     public void onBallServed()
     {
         GameHandler.state = GameState.PLAY;
@@ -112,7 +121,9 @@ public class GameHandler : MonoBehaviour
         InvokeRepeating("SpawnPowerUps", 2f, PowerUpInterval);
     }
 
-    //Handle overlays and gamestate when the ball is destroyed
+    /// <summary>
+    /// Handle overlays and gamestate when the ball is destroyed
+    /// </summary>
     public void onBallDestroyed()
     {
         GameHandler.state = GameState.GAME_OVER;
@@ -136,7 +147,9 @@ public class GameHandler : MonoBehaviour
         }
     }
 
-    //Handle overlays and gamestate under AreaMode when the play zone got placed/resizing is done
+    /// <summary>
+    /// Handle overlays and gamestate under AreaMode when the play zone got placed/resizing is done
+    /// </summary>
     public void onPlacementDone()
     {
         GameHandler.state = GameState.SERVE;
@@ -148,13 +161,20 @@ public class GameHandler : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Increases points in the current game
+    /// </summary>
     public void IncreasePoints()
     {
         this.points = this.points + (1 * pointmulitplier);
         this.UpdatePointOverlay();
     }
 
-    //Add new score and compare it with older highscores and return the postion in highscores
+    /// <summary>
+    /// Add new score and compare it with older highscores and return the postion in highscores
+    /// </summary>
+    /// <param name="score">HighScoreEntry object containing the points and gamemode</param>
+    /// <returns>Position of Highscore as int</returns>
     private int PlaceHighScore(HighScoreEntry score)
     {
         int posOfNewScore = -1;
@@ -171,15 +191,19 @@ public class GameHandler : MonoBehaviour
         return posOfNewScore;
     }
 
+    /// <summary>
+    /// Updates the points overlay with the current score
+    /// </summary>
     private void UpdatePointOverlay()
     {
         this.TextPoints.text = $"Points: {this.points}";
     }
-    
-    //Handle the random spawns of the two powerup types
+    /// <summary>
+    /// Handle the random spawns of the two powerup types
+    /// </summary>
     private void SpawnPowerUps()
     {
-        if (powerUpList.Count < PowerUpAmountLimit && distanceToWall >= 1.5f) 
+        if (powerUpList.Count < PowerUpAmountLimit && distanceToWall >= 1.5f)
         {
             /* Position of the power up inside the camera view 
              * with random x and y positions and z position depending on measured distance to the wall the player is looking at 
@@ -188,9 +212,9 @@ public class GameHandler : MonoBehaviour
             float y = Random.Range(0.1f, 0.90f);
             Vector3 pos = new Vector3(x, y, distanceToWall / 1.5f);
             pos = Camera.main.ViewportToWorldPoint(pos);
-            
+
             float powerUpType = Random.Range(0f, 1f);
-           
+
             if (powerUpType <= 0.5f) //Point Multiplier Buff
             {
                 GameObject realPowerUp = Instantiate(PowerUpPrefabPointMultiplier, pos, Camera.main.transform.rotation).gameObject;
@@ -204,9 +228,9 @@ public class GameHandler : MonoBehaviour
         }
     }
     
-    //When playing in the SpacialMode cast a ray towards the camera direction for powerup spawn calculations
     private void Update()
     {
+        //When playing in the SpacialMode cast a ray towards the camera direction for powerup spawn calculations
         if (mode.Equals(GameMode.SpacialMode))
         {
             //Cast a Ray to determine the current distance from the next wall that is facing the player

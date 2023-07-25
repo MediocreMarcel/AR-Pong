@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+/// <summary>
+/// Class handles collision events of the ball
+/// </summary>
 public class BallCollionDetector : MonoBehaviour
 {
     public UnityEvent OnPointCollission;
@@ -19,7 +22,10 @@ public class BallCollionDetector : MonoBehaviour
         PowerUpUptime = 15f;
     }
 
-    //Ball and Walls collision handler
+    /// <summary>
+    /// Hanles Collisions of the ball
+    /// </summary>
+    /// <param name="collision">Unity collision object</param>
     private void OnCollisionEnter(Collision collision)
     {
         //While playing in AreaMode collisions with anything but the designated playarea will kill the Ball
@@ -29,19 +35,25 @@ public class BallCollionDetector : MonoBehaviour
             GameHandler.onBallDestroyed();
         }
 
+        //Reflect Ball
         Vector3 newDirection = Vector3.Reflect(transform.forward, collision.contacts[0].normal);
         transform.rotation = Quaternion.LookRotation(newDirection);
 
+        //Give Ball Velocity
         Rigidbody ballRigidbody = GetComponent<Rigidbody>();
         ballRigidbody.velocity = transform.TransformDirection(new Vector3(0f, 0f, 1.1f));
 
+        //If collided with reflector shield, give player a point
         if (collision.gameObject.tag.Equals("ReflectorShield"))
         {
             this.GameHandler.IncreasePoints();
         }
     }
 
-    //Ball and PowerUp collision handler
+    /// <summary>
+    /// Method handles collision between balls and powerups
+    /// </summary>
+    /// <param name="other">Unity provided Collider Object</param>
     private void OnTriggerEnter(Collider other)
     {
         GameObject parentObjectForRemoval = other.gameObject.transform.parent.gameObject;
@@ -64,10 +76,18 @@ public class BallCollionDetector : MonoBehaviour
             Destroy(parentObjectForRemoval);
         }
     }
+
+    /// <summary>
+    /// Method reverts the effect of a single reflector shield size powerup 
+    /// </summary>
     private void RevertScaleChange()
     {
         this.ReflectorShield.transform.localScale -= scaleChange;
     }
+
+    /// <summary>
+    /// Method reverts the effect of a single Point Multiplier Powerup
+    /// </summary>
     private void RevertPointMultiplier()
     {
         this.GameHandler.GetComponent<GameHandler>().pointmulitplier = this.GameHandler.GetComponent<GameHandler>().pointmulitplier / 2;
